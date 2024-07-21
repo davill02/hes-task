@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Accounts</title>
+
+</head>
+
+<body>
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2>Profile</h2>
+
+                <div th:if="${param.error != null}">
+                    <h3>Global errors:</h3>
+                    <p th:each="err : ${param.error}" th:text="${err}" class="error" />
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th> AccountId </th>
+                            <th> Amount </th>
+                            <th> Blocked </th>
+                            <th> Withdraw</th>
+                            <th> Add</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${bankAccounts.empty}">
+                            <td colspan="2"> No Accounts Available </td>
+                        </tr>
+                        <tr th:each="account : ${bankAccounts}">
+                            <td><span th:text="${account.id}"> </span></td>
+                            <td><span th:text="${account.amount}"> </span></td>
+                            <td><span th:text="${account.isBlocked}"> </span></td>
+                            <td>
+                                <form th:action="@{/withdraw/{accountId}/50(accountId=${account.id})}" method="post">
+                                    <button type="submit" class="btn btn-primary btn-block mt-3">-50</button>
+
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/add/{accountId}/50(accountId=${account.id})}" method="post">
+                                    <button type="submit" class="btn btn-primary btn-block mt-3">+50</button>
+
+                                </form>
+                            </td>
+                    </tbody>
+                </table>
+                <form th:action="@{/create-bank-account}" method="post">
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Create bank account</button>
+                </form>
+                <div>
+                    <a href="/">Profile</a>
+                </div>
+            </div>
+        </div>
