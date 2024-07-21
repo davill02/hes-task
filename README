@@ -1,0 +1,18 @@
+This application is test task for HES company.
+
+- It's consist of next endpoints:
+
+    /sign-up - to create new account, accessible for any user
+
+    /bank/accounts - shows user bank accounts and give access to withdrawal and deposit
+
+    / - show user data (id, authorities, name)
+
+    /admin - give ability to admin block and unblock bank accounts
+
+Credencials for admin user:
+    - Admin 1234566
+
+Build app:
+- Go to directory /docker
+- Run docker compose up 
